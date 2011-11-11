@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# user
+user="'pivotal_poker'@'localhost'"
+
+# MySQL database
+dev_db=pivotal_planning_poker_development
+test_db=pivotal_planning_poker_test
+
+# Assume mysql is in the path
+mysql=mysql
+
+$mysql --user=root --host=127.0.0.1 --password --database= << EOF
+        GRANT USAGE ON *.* TO $user;
+        DROP USER $user;
+        DROP DATABASE IF EXISTS $dev_db;
+        DROP DATABASE IF EXISTS $test_db;
+        CREATE DATABASE $dev_db;
+        CREATE USER $user IDENTIFIED BY 'royalflush';
+        GRANT ALL ON $dev_db.* TO $user;
+        CREATE DATABASE $test_db;
+        GRANT ALL ON $test_db.* TO $user;
+EOF
+
