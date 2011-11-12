@@ -4,6 +4,8 @@ PivotalPlanningPoker::Application.routes.draw do
   resources :user_sessions, :only => [:create, :new, :destroy]
 
   resources :projects, :only => [:index, :show] do
+    post :update_hand, :on => :member
+
     resources :stories, :only => [ :show, :update ] do
       resources :estimates, :only => [ :create, :index ] do
         put :reveal, :on => :collection

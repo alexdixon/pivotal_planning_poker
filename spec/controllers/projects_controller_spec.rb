@@ -31,4 +31,17 @@ describe ProjectsController do
       assigns[:stories].should == [story]
     end
   end
+
+  describe "POST #update_hand" do
+    it "should update the current hand for a project" do
+      CurrentHand.create!(:project_id => 44, :story_id => 54)
+      put :update_hand, :id => 44, :story_id => 33
+      CurrentHand.find_by_project_id(44).story_id.should == 33
+    end
+
+    it "should update the current hand when no hand is specified for a project" do
+      put :update_hand, :id => 44, :story_id => 33
+      CurrentHand.find_by_project_id(44).story_id.should == 33
+    end
+  end
 end
