@@ -5,6 +5,7 @@ PivotalPlanningPoker::Application.routes.draw do
 
   resources :projects, :only => [:index, :show] do
     post :update_hand, :on => :member
+    get :current_hand, :on => :member
 
     resources :stories, :only => [ :show, :update ] do
       resources :estimates, :only => [ :create, :index ] do
