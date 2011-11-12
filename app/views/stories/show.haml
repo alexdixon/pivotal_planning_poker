@@ -27,7 +27,7 @@
   - @project.point_scale_array.each_with_index do |point, index|
     %div{:class => column_class_for('span-4', @project.point_scale_array.size, index) + ' availablePointBox'}
       .availablePoint= point
-      .availablePointButton= button_to("Throw", project_story_estimates_path(:user_project_id =>  @project.project_id, :story_id => @story.story_id, :user_id => @user.user_id, :estimate => point), :class => 'large')
+      .availablePointButton= button_to("Throw", project_story_estimates_path(:project_id =>  @project.project_id, :story_id => @story.story_id, :user_id => @user.user_id, :estimate => point), :class => 'large')
 
 .span-24.last.prepend-top
   %h3 Set the Estimate on this Story in Pivotal Tracker
