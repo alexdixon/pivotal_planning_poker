@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101211173342) do
+ActiveRecord::Schema.define(:version => 20111112154708) do
+
+  create_table "current_hands", :force => true do |t|
+    t.integer "project_id", :null => false
+    t.integer "story_id",   :null => false
+  end
+
+  add_index "current_hands", ["project_id"], :name => "index_current_hands_on_project_id", :unique => true
 
   create_table "games", :force => true do |t|
     t.integer  "tracker_story_id",                            :null => false
