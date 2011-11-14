@@ -42,6 +42,6 @@ class EstimatesController < ApplicationController
 
     flash[:success] = "Estimate registered"
 
-    redirect_to project_story_path(params[:project_id], params[:story_id])
+    redirect_to request.referrer
   end
 end
