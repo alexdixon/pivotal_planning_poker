@@ -98,7 +98,6 @@ $(document).ready(function() {
                 success: function() {
                     console.log('posted estimate ' + estimate + ' successfully');
                     $("#your_estimate").html('<p id="your_estimate">Your Estimate: ' + estimate + '</p>');
-
                 }
             });
             return false;

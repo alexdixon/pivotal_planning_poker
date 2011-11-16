@@ -12,9 +12,10 @@
 %ul
   - @stories.each do |story|
     %li
-      = link_to(story.story_name, project_story_path(story.project_id, story.story_id))
-      = " Estimate: #{estimate_for(story)}"
-      = link_to('Make current hand', update_hand_project_path(:id => story.project_id, :story_id => story.story_id), :class => 'make_current')
+      = "(#{estimate_for(story)}) #{story.story_name}"
+      = link_to('view', project_story_path(story.project_id, story.story_id))
+      = "|"
+      = link_to('make current hand', update_hand_project_path(:id => story.project_id, :story_id => story.story_id), :class => 'make_current')
 
 %p= link_to("Back to projects", projects_path)
 
