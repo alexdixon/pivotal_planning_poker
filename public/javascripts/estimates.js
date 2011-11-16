@@ -13,7 +13,7 @@ $(document).ready(function() {
         if (estimate == '-1') {
             return 'Unestimated';
         } else if (estimate == null) {
-            return 'Unable to retrieve estimate';
+            return 'Unestimated';
         } else {
             return estimate;
         }
@@ -21,9 +21,9 @@ $(document).ready(function() {
 
     var refreshEstimates = function(data) {
         if (data['estimates'][$("#current_username").attr('value')] != null) {
-            $("#your_estimate").html('<h3 id="your_estimate">Your Estimate: ' + data['estimates'][$("#current_username").attr('value')] + '</h3>');
+            $("#your_estimate").html('<p id="your_estimate">Your Estimate: ' + data['estimates'][$("#current_username").attr('value')] + '</p>');
         } else {
-            $("#your_estimate").html('<h3 id="your_estimate">You have not thrown an estimate for this story.</h3>');
+            $("#your_estimate").html('<p id="your_estimate">You haven\'t placed a bet</p>');
         }
 
         $("#tracker_estimate").html('<p>This story is estimated as a ' +
@@ -41,24 +41,26 @@ $(document).ready(function() {
                 html += '<ul>';
                 
                 for (var key in data['estimates']) {
-                    html += '<li>' + key + ' threw a ' + data['estimates'][key] + ' for this story</li>';
+                    html += '<li>' + data['estimates'][key] + ' (' + key + ')</li>';
                 }
 
                 html += '</ul>';
 
                 html += '<p><a href="#" id="re_estimate_link">Play again?</a>';
             } else {
-                html += '<p>Estimates thrown by ';
-
                 var keys = [ ];
                 for (key in data['estimates']) {
                     keys.push(key);
                 }
 
+                if (keys.length == 1)
+                    html += '<p>Bets posted by one person: '
+                else
+                    html += '<p>Bets posted by ' + keys.length + ' people: ';
                 html += keys.join(', ');
                 html += '.</p>';
 
-                html += '<p> Cards have not been revealed.  <a href="#" id="reveal_cards_link">Reveal them?</a>';
+                html += '<p> Bets have not been revealed.  <a href="#" id="reveal_cards_link">Reveal them?</a>';
             }
         }
 
@@ -80,6 +82,26 @@ $(document).ready(function() {
                 context: document.body,
                 success: function() { }
             });
+        });
+
+        $(".poker_chip").click(function(){
+            var estimate = 0;
+            for (var i = 0; i < 9; i++) {
+                if ($(this).hasClass('val' + i))
+                    estimate = i;
+            }
+            $.ajax({
+                url: $('#estimate_url').attr('value'),
+                type: 'POST',
+                data: {'estimate' : estimate},
+                context: document.body,
+                success: function() {
+                    console.log('posted estimate ' + estimate + ' successfully');
+                    $("#your_estimate").html('<p id="your_estimate">Your Estimate: ' + estimate + '</p>');
+
+                }
+            });
+            return false;
         });
     };
 

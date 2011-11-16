@@ -1,0 +1,26 @@
+/* TODO: make a sprite (once we can handle all the point scales)
+*/
+.poker_chip {
+  background: url(/images/chips/poker-chip-n.png) no-repeat top left;
+  width: 90px;
+  height: 90px;
+}
+.poker_chip.val1 {
+  background: url(/images/chips/poker-chip-1.png) no-repeat top left;
+}
+
+.poker_chip.val2 {
+  background: url(/images/chips/poker-chip-2.png) no-repeat top left;
+}
+
+.poker_chip.val3 {
+  background: url(/images/chips/poker-chip-3.png) no-repeat top left;
+}
+
+.poker_chip.val5 {
+  background: url(/images/chips/poker-chip-5.png) no-repeat top left;
+}
+
+.poker_chip.val8 {
+  background: url(/images/chips/poker-chip-8.png) no-repeat top left;
+}

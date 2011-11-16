@@ -4,6 +4,6 @@
   - @projects.each do |project|
     %li
       = link_to(project.project_name, project_path(project.project_id))
-      |
+      = '|'
       = link_to('Current Hand', current_hand_project_path(project.project_id))
 

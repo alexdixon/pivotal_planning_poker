@@ -42,6 +42,10 @@ class EstimatesController < ApplicationController
 
     flash[:success] = "Estimate registered"
 
-    redirect_to request.referrer
+    if request.xhr?
+      head 200
+    else
+      redirect_to request.referrer
+    end
   end
 end
