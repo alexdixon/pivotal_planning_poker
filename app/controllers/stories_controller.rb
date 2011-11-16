@@ -14,6 +14,6 @@ class StoriesController < ApplicationController
     Game.create_or_update(tracker_story.story_id, tracker_story.estimate)
 
     flash[:success] = "Story estimate updated"
-    redirect_to project_story_path(@project.project_id, tracker_story.story_id)
+    redirect_to request.referrer
   end
 end

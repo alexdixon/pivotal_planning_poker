@@ -22,9 +22,10 @@ module PivotalPlanningPoker
       end
     end
 
-    def self.for_project(project, token)
+    def self.for_project(project, token, filters = nil)
+      filter_string = filters.nil? ? "" : "?filter=#{filters}"
       client = Client.new(token)
-      resp   = client.get("https://www.pivotaltracker.com/services/v3/projects/#{project.project_id}/stories")
+      resp   = client.get("https://www.pivotaltracker.com/services/v3/projects/#{project.project_id}/stories#{filter_string}")
 
       Nokogiri::XML(resp).xpath('/stories/story').map do |story_node|
         new(story_node)

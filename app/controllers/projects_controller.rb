@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = PivotalPlanningPoker::Project.find(params[:id], @user.token)
-    @stories = PivotalPlanningPoker::Story.for_project(@project, @user.token)
+    @stories = PivotalPlanningPoker::Story.for_project(@project, @user.token, 'includedone:false')
   end
 
   def update_hand
