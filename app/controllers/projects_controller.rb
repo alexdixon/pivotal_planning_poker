@@ -14,6 +14,10 @@ class ProjectsController < ApplicationController
     hand = CurrentHand.find_or_initialize_by_project_id(:project_id => params[:id])
     hand.story_id = params[:story_id]
     hand.save!
+    
+    # Reset the game in case it's revealed/estimated.
+    game = Game.find_by_tracker_story_id(params[:story_id])
+    game.update_attributes(:estimates => {}, :revealed => false, :revealed_last_changed_by => @user.username)
     head 200 
   end
 
