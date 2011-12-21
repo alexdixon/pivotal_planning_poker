@@ -17,7 +17,11 @@ class ProjectsController < ApplicationController
     
     # Reset the game in case it's revealed/estimated.
     game = Game.find_by_tracker_story_id(params[:story_id])
-    game.update_attributes(:estimates => {}, :revealed => false, :revealed_last_changed_by => @user.username)
+    if game.nil?
+      Game.create(:tracker_story_id => params[:story_id], :estimates => { } )
+    else
+      game.update_attributes(:estimates => {}, :revealed => false, :revealed_last_changed_by => @user.username)
+    end
     head 200 
   end
 
